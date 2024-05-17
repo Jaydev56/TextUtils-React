@@ -1,0 +1,12 @@
+import React from "react";
+
+export default function Alerts(props){
+    return(
+    props.alert &&
+    <>
+    <div style={{textAlign: "center"}} className={`alert alert-${props.alert.alert} fade-shadow`} role="alert" >
+    <div >{props.alert.msg}</div>
+    </div>
+    </>
+    )
+}
