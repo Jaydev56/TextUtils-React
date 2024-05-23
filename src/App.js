@@ -47,12 +47,17 @@ function App() {
  
     <BrowserRouter>
     <Navbar title="TextUtils" mode={mode[0]} toggleMode = {toggleMode} darkModeText={mode[1]}/>
+    
     <Alerts alert = {alert}/>
       <Routes>
-      <Route exact path="/" element = {<><div className='container my-3'><TextForm heading="Text" col = {mode[0]} alertFunc={alertFunc}/></div></>}/>
+      <Route path="/" element = {<><div className='container my-3'><TextForm heading="Text" col = {mode[0]} alertFunc={alertFunc}/></div></>}/>
       </Routes>
+      {/*
       <Routes>
-      <Route exact path="/about" element = {<About/>}/>
+      <Route path="/build/index.html" element = {<><div className='container my-3'><TextForm heading="Text" col = {mode[0]} alertFunc={alertFunc}/></div></>}/>
+  </Routes>*/}
+      <Routes>
+      <Route exact path="/about" element = {<About col={mode[0]}/>}/>
       </Routes>
     </BrowserRouter>
   

@@ -34,16 +34,16 @@ return (
     <div className="mb-3">
     <textarea style={{backgroundColor: props.col === 'light'?'#e1dfdf':'#302b2b', color: props.col === 'light'?'black':'white'}} className="form-control" value={text} onChange={HandleonChange} id="myBox" rows="8"></textarea>
     </div>
-    <button type="submit" className="btn btn-primary mx-2" onClick={HandleUpClick}>Convert to Uppercase</button>
-    <button type="submit" className="btn btn-primary mx-2" onClick={HandleLoClick}>Convert to Lowercase</button>
-    <button type="submit" className="btn btn-primary mx-2" onClick={HandleClearClick}>Clear Text</button>
+    <button type="submit" disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={HandleUpClick}>Convert to Uppercase</button>
+    <button type="submit" disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={HandleLoClick}>Convert to Lowercase</button>
+    <button type="submit" disabled={text.length===0} className="btn btn-primary mx-2 my-1" onClick={HandleClearClick}>Clear Text</button>
 
 
   </div>
   <div className={`container my-4 text-${props.col === 'light'?'dark':'light'}`}>
     <h2>Text Summary</h2>
-    <p>{text.split(" ").length} words and {text.length} characters</p>
-    <p>Estimated reading time: {text.split(" ").length * 0.008}</p>
+    <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
+    <p>Estimated reading time: {text.split(" ").filter((element)=>{return element.length!==0}).length * 0.008}</p>
     <h2>Preview</h2>
     <p>{text.length>0?text:'Enter your text to preview it here'}</p>
   </div>

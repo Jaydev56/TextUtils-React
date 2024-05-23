@@ -1,89 +1,101 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default function About() {
+export default function About(props) {
     const [myStyle, SetmyStyle] = useState({
         color: 'black', 
         backgroundColor: 'white'
     })
-    const [ButtonStyle, ButtonnextColor] = useState({
-        backgroundColor: 'black', 
-        color: 'white'
-    })
+    const [clickColor, setClickColor] = useState({
+      color: myStyle.color, 
+      backgroundColor: myStyle.backgroundColor,
+      status: false
+  })
 
-    const [buttonText, NextMode] = useState('Dark')
-
-    const HandleDarkMode = ()=>{
-        if (myStyle.color === 'black'){
-            ButtonnextColor({
-                backgroundColor: 'white', 
-                color: 'black'
-            })
-            NextMode('Light')
-            SetmyStyle(
-            {
-                color: 'white', 
-                backgroundColor: 'black'
-            })
-        }
+  function HandleClickColor() {
+    if(clickColor.status === false){
+      if(props.col === 'light'){
+        setClickColor({
+          color: 'white', 
+          backgroundColor: '#212529',
+          status: true
+        })}
         else{
-            ButtonnextColor({
-                backgroundColor: 'black', 
-                color: 'white'
-            })
-            NextMode('Dark')
-            SetmyStyle({
-                color: 'black', 
-                backgroundColor: 'white'
-            })
-        }
-        
+          setClickColor({
+            color: 'black', 
+            backgroundColor: 'white',
+            status: true
+          })
+        } 
     }
+
+    else{
+      setClickColor({
+        color: myStyle.color, 
+        backgroundColor: myStyle.backgroundColor,
+        status: false
+      })
+    }
+  }
+    
+    useEffect(() => {
+      if(props.col === 'light'){
+        SetmyStyle({
+          color: 'black', 
+        backgroundColor: 'white'
+        })
+      }
+      else{
+        SetmyStyle({
+          color: 'white', 
+        backgroundColor: '#212529'
+        })
+      }
+    }, [props.col]);
+
 
 
   return (
     <div className='container' style={myStyle}>
-        <h1 className='my-3'>About me</h1>
+        <h1 className='my-3'>About</h1>
       <div className="accordion" id="accordionExample">
   <div className="accordion-item">
     <h2 className="accordion-header">
-      <button className="accordion-button" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Accordion Item #1
+      <button className="accordion-button collapsed" onClick={HandleClickColor} style={clickColor} type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Purpose
       </button>
     </h2>
-    <div id="collapseOne" style={myStyle} className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+    <div id="collapseOne" style={myStyle} className="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        When I thought of starting my react journey, my main goal was to focus on fundamentals and understand core principles of React library, which I did while creating this web application. Moreover TextUtils also provides numerous text modification functionalities which one can use for their own purpose without any hassle.
       </div>
     </div>
   </div>
   <div className="accordion-item">
     <h2 className="accordion-header">
-      <button className="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
+      <button className="accordion-button collapsed" onClick={HandleClickColor} style={clickColor} type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Browser compatible
       </button>
     </h2>
     <div id="collapseTwo" style={myStyle} className="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        This app is compatible with almost all the modern browsers available till date. If any issus are found, please contact me through my email address jayadevpillai56@gmail.com
       </div>
     </div>
   </div>
   <div className="accordion-item">
     <h2 className="accordion-header">
-      <button className="accordion-button collapsed" style={myStyle} type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Accordion Item #3
+      <button className="accordion-button collapsed" onClick={HandleClickColor} style={clickColor} type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+      Free to use
       </button>
     </h2>
     <div id="collapseThree" style={myStyle} className="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div className="accordion-body">
-        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classNamees that we use to style each element. These classNamees control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      This Utility is absolutely free to use with no ads. Please use this web application as per your requirements and spread the word to help make this site a popular text modification destination.
       </div>
     </div>
   </div>
 </div>
-    <div className="container my-3">
-        <button type="button" style={ButtonStyle} className="btn btn" onClick={HandleDarkMode}>{buttonText}</button>
-    </div>
+
 
 </div>
   )
